@@ -13,7 +13,7 @@ function Gallery() {
       .then((uploaded) => {
         setImages(
           uploaded.map((img) => ({
-            src: `http://localhost:5001${img.url}`,
+          src: `${API_BASE}${img.url}`, 
             label: img.label,
           }))
         );
