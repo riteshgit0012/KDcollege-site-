@@ -7,7 +7,7 @@ import Ritesh from "./assets/Ritesh.jpg"
 import kunal from "./assets/kunal.jpg"
 import Rohit from "./assets/Rohit.jpg"
 
-const API_URL = "http://localhost:5001/api/contact";
+const API_URL = "https://kdcollege-site-production.up.railway.app/api/contact";
 // Splits text into spans so each letter animates in one-by-one
 function TypeWriter({ text, className, style }) {
   const words = text.split(" ");
