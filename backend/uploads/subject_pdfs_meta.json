@@ -1,0 +1,56 @@
+[
+  {
+    "_id": "cb4c33db09fa45df90d6318ef5110f50",
+    "department": "Science",
+    "subject": "Physics",
+    "class_name": "Class 12",
+    "filename": "7c94b730b1594875bbf4e307619aba7a.pdf",
+    "original_name": "Ritesh.pdf",
+    "url": "/uploads/pdfs/7c94b730b1594875bbf4e307619aba7a.pdf"
+  },
+  {
+    "_id": "e2fe17128bc848bf9546f015930b4368",
+    "department": "Science",
+    "subject": "Chemistry",
+    "class_name": "Class 10",
+    "filename": "44b62ba3fa02429b994fb6e0c0006297.pdf",
+    "original_name": "Ritesh.pdf",
+    "url": "/uploads/pdfs/44b62ba3fa02429b994fb6e0c0006297.pdf"
+  },
+  {
+    "_id": "c4fd1805e5da49039b4af6f8728bfd76",
+    "department": "Science",
+    "subject": "Physics",
+    "class_name": "Class 10",
+    "filename": "ddb87dea091c4817905645cdd6c22525.pdf",
+    "original_name": "Reimbursement_Claim_Ritesh_Sharma (1) (1).pdf",
+    "url": "/uploads/pdfs/ddb87dea091c4817905645cdd6c22525.pdf"
+  },
+  {
+    "_id": "5562bf7616ff4a40ac9f0500b34dccad",
+    "department": "Science",
+    "subject": "Physics",
+    "class_name": "Class 10",
+    "filename": "2c57b5d92eb942788455da5b61ab35f4.pdf",
+    "original_name": "tech.pdf",
+    "url": "/uploads/pdfs/2c57b5d92eb942788455da5b61ab35f4.pdf"
+  },
+  {
+    "_id": "1fe10e1402d34b9daa82d767d51b563f",
+    "department": "Science",
+    "subject": "Physics",
+    "class_name": "Class 12",
+    "filename": "ae5e0114a81a4dc7a8bab19aba55328d.pdf",
+    "original_name": "UHVPE_Notes.pdf",
+    "url": "/uploads/pdfs/ae5e0114a81a4dc7a8bab19aba55328d.pdf"
+  },
+  {
+    "_id": "93b5b279306449b7b1409b356efa5ced",
+    "department": "Science",
+    "subject": "Biology",
+    "class_name": "Class 9",
+    "filename": "582444e8b1c34b8589ca42d9c19f6068.pdf",
+    "original_name": "pancard.pdf",
+    "url": "/uploads/pdfs/582444e8b1c34b8589ca42d9c19f6068.pdf"
+  }
+]

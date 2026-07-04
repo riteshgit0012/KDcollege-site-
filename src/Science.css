@@ -1,0 +1,203 @@
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+@keyframes cardSlideUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.science-page {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #f0f5ff 0%, #e8efff 100%);
+  font-family: 'Segoe UI', sans-serif;
+  padding-bottom: 60px;
+}
+
+.science-back-bar {
+  background: linear-gradient(90deg, #0f2370, #1a3c8f);
+  padding: 14px 40px;
+}
+
+.science-back-btn {
+  color: rgba(255,255,255,0.88);
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 600;
+  transition: color 0.2s;
+}
+
+.science-back-btn:hover {
+  color: white;
+}
+
+.science-header {
+  text-align: center;
+  padding: 48px 20px 42px;
+}
+
+.science-badge {
+  background: #1a3c8f;
+  color: white;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 4px 14px;
+  border-radius: 20px;
+  letter-spacing: 1.5px;
+}
+
+.science-title {
+  font-size: clamp(1.4rem, 3.5vw, 2rem);
+  font-weight: 800;
+  color: #0d1f5c;
+  margin: 10px 0 8px;
+}
+
+.science-divider {
+  width: 44px;
+  height: 3px;
+  background: linear-gradient(90deg, #1a3c8f, #2d6cdf);
+  border-radius: 2px;
+  margin: 0 auto 12px;
+}
+
+.science-subtitle {
+  color: #666;
+  font-size: 13.5px;
+  max-width: 500px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+.science-grid {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 28px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+  gap: 24px;
+}
+
+.science-card {
+  background: white;
+  border-radius: 16px;
+  padding: 24px 22px;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  cursor: pointer;
+  box-shadow: 0 4px 20px rgba(26,60,143,0.09);
+  border: 1.5px solid rgba(26,60,143,0.08);
+  transition: transform 0.25s, box-shadow 0.25s;
+  animation: cardSlideUp 0.45s ease both;
+}
+
+.science-card:hover {
+  transform: translateY(-6px) scale(1.02);
+  box-shadow: 0 16px 44px rgba(26,60,143,0.18);
+}
+
+.science-card-icon {
+  width: 56px;
+  height: 56px;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 26px;
+  flex-shrink: 0;
+}
+
+.science-card-body {
+  flex: 1;
+}
+
+.science-card-name {
+  font-size: 17px;
+  font-weight: 800;
+  margin-bottom: 5px;
+}
+
+.science-card-desc {
+  font-size: 13px;
+  color: #666;
+  line-height: 1.55;
+}
+
+.science-card-arrow {
+  font-size: 20px;
+  font-weight: 700;
+  flex-shrink: 0;
+  opacity: 0.5;
+  transition: opacity 0.2s, transform 0.2s;
+}
+
+.science-card:hover .science-card-arrow {
+  opacity: 1;
+  transform: translateX(4px);
+}
+
+/* Physics Class Cards */
+.physics-class-list {
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 0 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.physics-class-card {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  padding: 22px 28px;
+  border-radius: 14px;
+  text-decoration: none;
+  box-shadow: 0 4px 18px rgba(26,60,143,0.09);
+  transition: transform 0.22s, box-shadow 0.22s;
+  animation: cardSlideUp 0.4s ease both;
+}
+
+.physics-class-card:hover {
+  transform: translateY(-4px) scale(1.01);
+  box-shadow: 0 14px 36px rgba(26,60,143,0.18);
+}
+
+.physics-class-icon {
+  font-size: 28px;
+  flex-shrink: 0;
+}
+
+.physics-class-label {
+  flex: 1;
+  font-size: 17px;
+  font-weight: 700;
+}
+
+.physics-class-arrow {
+  font-size: 13px;
+  font-weight: 600;
+  white-space: nowrap;
+  opacity: 0.75;
+  transition: opacity 0.2s;
+}
+
+.physics-class-card:hover .physics-class-arrow {
+  opacity: 1;
+}
+
+@media (max-width: 600px) {
+  .science-grid {
+    grid-template-columns: 1fr;
+    padding: 0 16px;
+  }
+  .science-back-bar {
+    padding: 14px 16px;
+  }
+  .physics-class-list {
+    padding: 0 16px;
+  }
+  .physics-class-card {
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+}

@@ -1,0 +1,51 @@
+[
+  {
+    "_id": "fee2af60a979427798ba721f0473ce42",
+    "name": "Ritesh sharma",
+    "department": "Physics",
+    "photo": "/uploads/teachers/47073a3901f04373aeac69d4ab05a48e.jpeg",
+    "filename": "47073a3901f04373aeac69d4ab05a48e.jpeg"
+  },
+  {
+    "_id": "6d6e6cdb6922439786f8a485851c0fae",
+    "name": "hjsdbcjbcd",
+    "department": "Science",
+    "photo": "/uploads/teachers/b2c4424181e147cba3a8d5d4cbe748cb.jpeg",
+    "filename": "b2c4424181e147cba3a8d5d4cbe748cb.jpeg"
+  },
+  {
+    "_id": "6c2fbc42f2084aaaa6dc314bff0ca863",
+    "name": "ljbcdbc",
+    "department": "Science",
+    "photo": "/uploads/teachers/7f735411acfb46cf913a90a236ea5a0e.jpeg",
+    "filename": "7f735411acfb46cf913a90a236ea5a0e.jpeg"
+  },
+  {
+    "_id": "0a246b9aaa604bc08af19c5d74d98967",
+    "name": "kjb jbd",
+    "department": "Science",
+    "photo": "/uploads/teachers/58de7ed6378c4c69b8b68e0a0cf870ed.jpeg",
+    "filename": "58de7ed6378c4c69b8b68e0a0cf870ed.jpeg"
+  },
+  {
+    "_id": "c60cc76decc94b918f92c78490d1b17d",
+    "name": ".kbdabi",
+    "department": "Science",
+    "photo": "/uploads/teachers/9733a552de6444348b04f4c6a32c0198.jpeg",
+    "filename": "9733a552de6444348b04f4c6a32c0198.jpeg"
+  },
+  {
+    "_id": "ba3921fb40284251be0fd2082bd9303b",
+    "name": "bfieab fou",
+    "department": "Science",
+    "photo": "/uploads/teachers/a88106cb80b7446baa6627289502d7dc.jpeg",
+    "filename": "a88106cb80b7446baa6627289502d7dc.jpeg"
+  },
+  {
+    "_id": "14af48ad3ff14bd4b8d65561c5bac6c4",
+    "name": "kbib i",
+    "department": "Science",
+    "photo": "/uploads/teachers/46b91b9eeec441df8abf9015b90cce81.jpeg",
+    "filename": "46b91b9eeec441df8abf9015b90cce81.jpeg"
+  }
+]

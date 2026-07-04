@@ -1,0 +1,220 @@
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+@keyframes galleryFadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── PAGE ── */
+.gallery-page {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #f0f5ff 0%, #e8efff 100%);
+  font-family: 'Segoe UI', sans-serif;
+  padding-bottom: 60px;
+}
+
+/* ── BACK BAR ── */
+.gallery-back-bar {
+  background: linear-gradient(90deg, #0f2370, #1a3c8f);
+  padding: 14px 40px;
+}
+.gallery-back-btn {
+  color: rgba(255,255,255,0.88);
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 600;
+  transition: color 0.2s;
+}
+.gallery-back-btn:hover { color: white; }
+
+/* ── HEADER ── */
+.gallery-header {
+  text-align: center;
+  padding: 56px 20px 40px;
+}
+.gallery-badge {
+  background: #1a3c8f;
+  color: white;
+  font-size: 12px;
+  font-weight: 700;
+  padding: 5px 18px;
+  border-radius: 20px;
+  letter-spacing: 1.5px;
+}
+.gallery-title {
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: 900;
+  color: #0d1f5c;
+  margin: 16px 0 12px;
+}
+.gallery-divider {
+  width: 60px;
+  height: 4px;
+  background: linear-gradient(90deg, #1a3c8f, #2d6cdf);
+  border-radius: 2px;
+  margin: 0 auto 20px;
+}
+.gallery-subtitle {
+  color: #555;
+  font-size: 15px;
+  max-width: 520px;
+  margin: 0 auto;
+  line-height: 1.7;
+}
+
+/* ── UNIFORM GRID ── */
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  max-width: 1300px;
+  margin: 0 auto;
+  padding: 0 28px;
+}
+
+.gallery-item {
+  border-radius: 12px;
+  overflow: hidden;
+  position: relative;
+  cursor: pointer;
+  box-shadow: 0 4px 18px rgba(26,60,143,0.10);
+  animation: galleryFadeUp 0.45s ease both;
+  background: #dde6ff;
+  aspect-ratio: 4 / 3;         /* har image same ratio — chahe portrait ho ya landscape */
+}
+
+.gallery-item img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;            /* image crop hokar box mein fit rahegi, stretch nahi hogi */
+  object-position: center;
+  transition: transform 0.35s ease;
+}
+
+/* Hover overlay */
+.gallery-item-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(10,25,80,0.72) 0%, transparent 55%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  padding: 16px;
+}
+
+.gallery-item:hover .gallery-item-overlay { opacity: 1; }
+.gallery-item:hover img { transform: scale(1.05); }
+
+.gallery-item-label {
+  color: white;
+  font-size: 13px;
+  font-weight: 700;
+  text-shadow: 0 1px 4px rgba(0,0,0,0.5);
+}
+.gallery-item-zoom {
+  font-size: 18px;
+  filter: drop-shadow(0 1px 3px rgba(0,0,0,0.5));
+}
+
+/* ── LIGHTBOX ── */
+.lightbox-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(5, 12, 40, 0.94);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  backdrop-filter: blur(6px);
+}
+
+.lightbox-img-wrap {
+  position: relative;
+  max-width: 90vw;
+  max-height: 88vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.lightbox-img-wrap img {
+  max-width: 90vw;
+  max-height: 80vh;
+  border-radius: 10px;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.6);
+  object-fit: contain;
+  display: block;
+}
+
+.lightbox-caption {
+  color: rgba(255,255,255,0.88);
+  font-size: 15px;
+  font-weight: 600;
+  margin-top: 14px;
+  text-align: center;
+}
+.lightbox-counter {
+  color: rgba(255,255,255,0.45);
+  font-size: 12px;
+  margin-top: 4px;
+}
+
+.lightbox-close {
+  position: fixed;
+  top: 20px;
+  right: 24px;
+  background: rgba(255,255,255,0.12);
+  border: none;
+  color: white;
+  font-size: 20px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s;
+  z-index: 1001;
+}
+.lightbox-close:hover { background: rgba(255,255,255,0.25); }
+
+.lightbox-arrow {
+  background: rgba(255,255,255,0.10);
+  border: none;
+  color: white;
+  font-size: 42px;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s;
+  flex-shrink: 0;
+  line-height: 1;
+  padding-bottom: 4px;
+}
+.lightbox-arrow:hover { background: rgba(255,255,255,0.22); }
+.lightbox-prev { margin-right: 16px; }
+.lightbox-next { margin-left: 16px; }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 1100px) {
+  .gallery-grid { grid-template-columns: repeat(3, 1fr); }
+}
+@media (max-width: 860px) {
+  .gallery-grid { grid-template-columns: repeat(2, 1fr); padding: 0 16px; }
+  .gallery-back-bar { padding: 14px 16px; }
+}
+@media (max-width: 480px) {
+  .gallery-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+  .lightbox-arrow { width: 40px; height: 40px; font-size: 30px; }
+  .lightbox-prev { margin-right: 8px; }
+  .lightbox-next { margin-left: 8px; }
+}
