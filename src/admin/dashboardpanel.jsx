@@ -124,7 +124,7 @@ function DashboardPanel({ token, showMsg }) {
           <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(180px, 1fr))", gap: 16 }}>
             {images.map((img) => (
               <div key={img.filename} style={{ borderRadius: 12, overflow: "hidden", border: "1px solid #eef0f8", boxShadow: "0 2px 8px rgba(0,0,0,0.06)" }}>
-                <img src={`http://localhost:5001${img.url}`} alt={img.label} style={{ width: "100%", height: 140, objectFit: "cover", display: "block" }} />
+                <img src={`${API_BASE}${img.url}`} alt={img.label} style={{ width: "100%", height: 140, objectFit: "cover", display: "block" }} />
                 <div style={{ padding: "10px 12px", background: "white" }}>
                   <div style={{ fontSize: 13, fontWeight: 600, color: "#333", marginBottom: 8 }}>{img.label}</div>
                   <button
