@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 
-const API = "https://kdcollege-site-production.up.railway.app/api";
+const API_BASE = "https://kdcollege-site-production.up.railway.app";
+const API = `${API_BASE}/api`;
 
 function DashboardPanel({ token, showMsg }) {
   const [images, setImages]     = useState([]);
@@ -13,7 +14,7 @@ function DashboardPanel({ token, showMsg }) {
     try {
       const res = await fetch(`${API}/gallery/images`);
       const data = await res.json();
-      setImages(data);
+      setImages(Array.isArray(data) ? data : []);
     } catch {
       showMsg("Images not loaded , please try again .....", "error");
     }
@@ -77,7 +78,7 @@ function DashboardPanel({ token, showMsg }) {
         boxShadow: "0 4px 20px rgba(26,60,143,0.08)", marginBottom: 32,
       }}>
         <h2 style={{ margin: "0 0 20px", color: "#1a3c8f", fontSize: 20, fontWeight: 800 }}>
-          📸 please upload the photo in galary. 
+          📸 please upload the photo in galary.
         </h2>
         <form onSubmit={handleUpload}>
           <div style={{ display: "flex", gap: 24, flexWrap: "wrap" }}>
