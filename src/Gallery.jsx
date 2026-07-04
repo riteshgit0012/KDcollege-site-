@@ -2,18 +2,21 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import "./Gallery.css";
 
+const API_BASE = "https://kdcollege-site-production.up.railway.app";
+
 function Gallery() {
   const [images, setImages]   = useState([]);
   const [loading, setLoading] = useState(true);
   const [lightbox, setLightbox] = useState(null);
 
   useEffect(() => {
-    fetch("https://kdcollege-site-production.up.railway.app/api/gallery/images")
+    fetch(`${API_BASE}/api/gallery/images`)
       .then((r) => r.json())
       .then((uploaded) => {
+        const list = Array.isArray(uploaded) ? uploaded : [];
         setImages(
-          uploaded.map((img) => ({
-          src: `${API_BASE}${img.url}`, 
+          list.map((img) => ({
+            src: `${API_BASE}${img.url}`,
             label: img.label,
           }))
         );
