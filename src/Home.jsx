@@ -50,7 +50,7 @@ function Home() {
     e.preventDefault();
     setFormStatus({ loading: true, success: "", error: "" });
     try {
-      const res = await fetch("http://localhost:5001/api/contact", {
+      const res = await fetch("https://kdcollege-site-production.up.railway.app/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(form),

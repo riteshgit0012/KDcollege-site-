@@ -8,7 +8,7 @@ function Gallery() {
   const [lightbox, setLightbox] = useState(null);
 
   useEffect(() => {
-    fetch("http://localhost:5001/api/gallery/images")
+    fetch("https://kdcollege-site-production.up.railway.app/api/gallery/images")
       .then((r) => r.json())
       .then((uploaded) => {
         setImages(

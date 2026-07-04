@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-const API = "http://localhost:5001/api";
+const API = "https://kdcollege-site-production.up.railway.app/api";
 
 function DashboardPanel({ token, showMsg }) {
   const [images, setImages]     = useState([]);

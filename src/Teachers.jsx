@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
-const API = "http://localhost:5001/api";
+const API = "https://kdcollege-site-production.up.railway.app/api";
 
 function Teachers() {
   const [teachers, setTeachers] = useState([]);

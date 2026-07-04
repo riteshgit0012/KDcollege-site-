@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const API_URL = "http://localhost:5001/api/contact";
+const API_URL = "https://kdcollege-site-production.up.railway.app/api/contact";
 
 function Contact() {
   const [form, setForm]     = useState({ name: "", phone: "", email: "", message: "" });
