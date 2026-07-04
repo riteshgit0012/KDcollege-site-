@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
-const API = "https://kdcollege-site-production.up.railway.app/api";
+const API_BASE = "https://kdcollege-site-production.up.railway.app";
+const API = `${API_BASE}/api`;
 
 function Teachers() {
   const [teachers, setTeachers] = useState([]);
@@ -78,7 +79,7 @@ function Teachers() {
               >
                 <div style={{ position: "relative", height: 200, background: "#e8efff" }}>
                   <img
-                    src={t.photo ? `http://localhost:5001${t.photo}` : "https://via.placeholder.com/220x200?text=No+Photo"}
+                    src={t.photo ? `${API_BASE}${t.photo}` : "https://via.placeholder.com/220x200?text=No+Photo"}
                     alt={t.name}
                     style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
                   />

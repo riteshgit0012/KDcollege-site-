@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 
-const API = "https://kdcollege-site-production.up.railway.app/api";
+const API_BASE = "https://kdcollege-site-production.up.railway.app";
+const API = `${API_BASE}/api`;
 
 const DEPARTMENTS = [
   "Science",
@@ -159,7 +160,7 @@ function TeacherPanel({ token, showMsg }) {
             {teachers.map((t) => (
               <div key={t._id || t.id} style={{ borderRadius: 14, overflow: "hidden", border: "1px solid #eef0f8", boxShadow: "0 2px 10px rgba(0,0,0,0.07)", background: "#fafbff" }}>
                 <img
-                  src={t.photo ? `http://localhost:5001${t.photo}` : "https://via.placeholder.com/200x160?text=No+Photo"}
+                  src={t.photo ? `${API_BASE}${t.photo}` : "https://via.placeholder.com/200x160?text=No+Photo"}
                   alt={t.name}
                   style={{ width: "100%", height: 160, objectFit: "cover", display: "block" }}
                 />
