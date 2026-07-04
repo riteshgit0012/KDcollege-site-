@@ -7,7 +7,7 @@ import Ritesh from "./assets/Ritesh.jpg"
 import kunal from "./assets/kunal.jpg"
 import Rohit from "./assets/Rohit.jpg"
 
-
+const API_URL = "http://localhost:5001/api/contact";
 // Splits text into spans so each letter animates in one-by-one
 function TypeWriter({ text, className, style }) {
   const words = text.split(" ");
@@ -50,7 +50,7 @@ function Home() {
     e.preventDefault();
     setFormStatus({ loading: true, success: "", error: "" });
     try {
-      const res = await fetch("https://kdcollege-site-production.up.railway.app/api/contact", {
+      const res = await fetch(API_URL, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(form),
@@ -66,7 +66,6 @@ function Home() {
       setFormStatus({ loading: false, success: "", error: "Cannot connect to server. Please try again later." });
     }
   };
-
   const aboutRef       = useRef(null);
   const contactRef     = useRef(null);
   const topRef         = useRef(null);

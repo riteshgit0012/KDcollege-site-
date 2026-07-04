@@ -4,11 +4,14 @@ import os
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from datetime import datetime, timezone
-from fastapi import APIRouter
+from fastapi import APIRouter, BackgroundTasks
 from pydantic import BaseModel
 from dotenv import load_dotenv
+import requests
 
 load_dotenv()
+
+BREVO_API_KEY = os.getenv("BREVO_API_KEY", "")
 
 router = APIRouter()
 
@@ -71,15 +74,22 @@ def send_email(form: ContactForm):
 
     msg.attach(MIMEText(html, "html"))
 
-    with smtplib.SMTP(SMTP_HOST, SMTP_PORT) as server:
+    with smtplib.SMTP(SMTP_HOST, SMTP_PORT, timeout=15) as server:
         server.ehlo()
         server.starttls()
         server.login(SMTP_USER, SMTP_PASSWORD)
         server.sendmail(SMTP_USER, RECEIVER_EMAILS, msg.as_string())
 
 
+def send_email_safe(form: ContactForm):
+    try:
+        send_email(form)
+    except Exception as e:
+        print("Email send failed:", e)
+
+
 @router.post("/contact")
-def submit_contact(form: ContactForm):
+def submit_contact(form: ContactForm, background_tasks: BackgroundTasks):
     if not form.name.strip():
         return {"success": False, "error": "Name is required."}
 
@@ -92,10 +102,6 @@ def submit_contact(form: ContactForm):
     if not form.message.strip():
         return {"success": False, "error": "Message is required."}
 
-    try:
-        send_email(form)
-    except Exception as e:
-        print("Email send failed:", e)
-        return {"success": False, "error": "Failed to send email. Please try again."}
+    background_tasks.add_task(send_email_safe, form)
 
     return {"success": True, "message": "Message received! We will contact you soon."}
