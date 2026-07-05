@@ -253,17 +253,34 @@
           }
         }
 
-        /* ── NAVBAR RESPONSIVE ── */
-        @media (max-width: 860px) {
-          .nav-links  { display: none !important; }
-          .hamburger  { display: flex; }
-          .navbar     { padding: 0 16px !important; }
+         /* ── NAVBAR RESPONSIVE ── */
+/* Tablet: nav-links hatao, hamburger dikhao */
+        @media (max-width: 1024px) {
+         .nav-links  { display: none !important; }
+         .hamburger  { display: flex; }
+         .navbar     { padding: 0 20px !important; }
         }
 
-        /* Navbar college name — hide subtitle on very small screens */
+/* Phone: sab thoda compact karo */
+        @media (max-width: 480px) {
+         .navbar { padding: 0 14px !important; }
+         .navbar-logo {
+           width: 34px !important;
+           height: 34px !important;
+           font-size: 13px !important;
+           }
+         .navbar-college-name { font-size: 12px !important; }
+         .navbar-college-sub  { font-size: 9px !important; }
+         .login-btn {
+           padding: 7px 15px;
+           font-size: 13px;
+           }
+         }
+
+/* Bahut chhote phones: subtitle hide karo */
         @media (max-width: 360px) {
-          .navbar-college-sub { display: none; }
-          .navbar-college-name { font-size: 12px !important; }
+         .navbar-college-sub { display: none; }
+         .navbar-college-name { font-size: 11px !important; }
         }
 
         /* ABOUT SECTION RESPONSIVE */

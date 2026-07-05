@@ -109,22 +109,23 @@ function Home() {
           height: 64,
         }}
       >
-        <div style={{ display: "flex", alignItems: "center", height: "100%", maxWidth: 1500, margin: "0 auto", width: "100%" }}>
+        <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", height: "100%", maxWidth: 1500, margin: "0 auto", width: "100%" }}>
 
           {/* LEFT — College name / logo */}
-          <div style={{ display: "flex", alignItems: "center", gap: 11, }}>
-            <div style={{
-              width: 40, height: 40, borderRadius: "50%",
-              background: "linear-gradient(135deg,#fff,#c8d8ff)",
-              display: "flex", alignItems: "center", justifyContent: "center",
-              fontWeight: 900, fontSize: 15, color: "#1a3c8f",
-              boxShadow: "0 2px 10px rgba(0,0,0,0.2)",
-            }}>KD</div>
-            <div>
-              <div style={{ color: "white", fontWeight: 800, fontSize: 14, lineHeight: 1.2 }}>K.D Public Inter College</div>
-              <div style={{ color: "rgba(255,255,255,0.6)", fontSize: 10 }}>Excellence in Education</div>
-            </div>
-          </div>
+<div style={{ display: "flex", alignItems: "center", gap: 11, flexShrink: 0 }}>
+  <div className="navbar-logo" style={{
+    width: 40, height: 40, borderRadius: "50%",
+    background: "linear-gradient(135deg,#fff,#c8d8ff)",
+    display: "flex", alignItems: "center", justifyContent: "center",
+    fontWeight: 900, fontSize: 15, color: "#1a3c8f",
+    boxShadow: "0 2px 10px rgba(0,0,0,0.2)",
+    flexShrink: 0,
+  }}>KD</div>
+  <div>
+    <div className="navbar-college-name" style={{ color: "white", fontWeight: 800, fontSize: 14, lineHeight: 1.2 }}>K.D Public Inter College</div>
+    <div className="navbar-college-sub" style={{ color: "rgba(255,255,255,0.6)", fontSize: 10 }}>Excellence in Education</div>
+  </div>
+</div>
 
           {/* CENTER — nav links */}
           <div className="nav-links" style={{ display: "flex", gap: 2, margin: "0 auto" }}>
