@@ -235,11 +235,43 @@
         }
 
         /* Disable fixed attachment on mobile (iOS bug) */
-        @media (max-width: 860px) {
-          .hero-bg-layer {
-            background-attachment: scroll;
-          }
-        }
+@media (max-width: 860px) {
+  .hero-bg-layer {
+    background-attachment: scroll;
+    background-position: center top; /* image ka upar wala hissa dikhao */
+  }
+}
+
+      /* Blur wali background layer (peeche) */
+.hero-bg-blur {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  filter: blur(20px);
+  transform: scale(1.1); /* blur ke kinare chhupane ke liye */
+  z-index: 0;
+  display: none; /* desktop pe nahi chahiye */
+}
+
+@media (max-width: 860px) {
+  .hero-bg-blur {
+    display: block;
+  }
+  .hero-bg-layer {
+    background-attachment: scroll;
+    background-size: contain;      /* poori image dikhegi */
+    background-repeat: no-repeat;
+    background-position: center;
+    z-index: 1;
+  }
+  .hero-overlay {
+    z-index: 2;
+  }
+  .hero-content {
+    z-index: 3;
+  }
+}
 
         @media (max-width: 480px) {
           .hero-btns {

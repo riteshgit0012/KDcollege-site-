@@ -208,6 +208,7 @@ function Home() {
 
       {/* ══════════ HERO ══════════ */}
       <section className="hero-section">
+         <div className="hero-bg-blur" style={{ backgroundImage: `url(${collegeBg})` }} />
         <div className="hero-bg-layer active" style={{ backgroundImage: `url(${collegeBg})` }} />
         <div className="hero-overlay" />
         <div className="hero-content">
