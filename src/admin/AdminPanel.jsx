@@ -33,27 +33,74 @@ function AdminPanel() {
   return (
     <div style={{ minHeight: "100vh", background: "#f0f4ff", fontFamily: "'Segoe UI', sans-serif" }}>
 
+      {/* ─── Responsive styles ─── */}
+      <style>{`
+        .ap-topbar {
+          background: linear-gradient(135deg,#1a3c8f,#2d6cdf);
+          color: white;
+          padding: 0 32px;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          box-shadow: 0 2px 12px rgba(26,60,143,0.3);
+          min-height: 64px;
+          gap: 12px;
+          flex-wrap: wrap;
+        }
+        .ap-tabs {
+          display: flex;
+          gap: 4px;
+          overflow-x: auto;
+          -webkit-overflow-scrolling: touch;
+          scrollbar-width: none;
+        }
+        .ap-tabs::-webkit-scrollbar { display: none; }
+        .ap-tab-btn { white-space: nowrap; flex-shrink: 0; }
+        .ap-content {
+          max-width: 1000px;
+          margin: 0 auto;
+          padding: 32px 16px;
+        }
+
+        /* Tablet & below: tabs move to their own full-width row */
+        @media (max-width: 860px) {
+          .ap-topbar {
+            padding: 10px 16px;
+          }
+          .ap-tabs {
+            order: 3;
+            width: 100%;
+            justify-content: flex-start;
+            padding-bottom: 6px;
+          }
+        }
+
+        /* Mobile: tighter spacing */
+        @media (max-width: 520px) {
+          .ap-content { padding: 20px 12px; }
+          .ap-brand-title { font-size: 16px !important; }
+          .ap-brand-sub { display: none; }
+          .ap-logout-btn { padding: 7px 14px !important; font-size: 13px !important; }
+          .ap-tab-btn { padding: 8px 14px !important; font-size: 13px !important; }
+        }
+      `}</style>
+
       {/* Top bar */}
-      <div style={{
-        background: "linear-gradient(135deg,#1a3c8f,#2d6cdf)",
-        color: "white", padding: "0 32px",
-        display: "flex", alignItems: "center", justifyContent: "space-between",
-        boxShadow: "0 2px 12px rgba(26,60,143,0.3)",
-        height: 64,
-      }}>
+      <div className="ap-topbar">
         <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
           <span style={{ fontSize: 26 }}>🎓</span>
           <div>
-            <div style={{ fontWeight: 800, fontSize: 18 }}>Admin Panel</div>
-            <div style={{ fontSize: 12, opacity: 0.8 }}>K.D Public Inter College</div>
+            <div className="ap-brand-title" style={{ fontWeight: 800, fontSize: 18 }}>Admin Panel</div>
+            <div className="ap-brand-sub" style={{ fontSize: 12, opacity: 0.8 }}>K.D Public Inter College</div>
           </div>
         </div>
 
         {/* Tab Navigation */}
-        <div style={{ display: "flex", gap: 4 }}>
+        <div className="ap-tabs">
           {tabs.map((tab) => (
             <button
               key={tab.key}
+              className="ap-tab-btn"
               onClick={() => setActiveTab(tab.key)}
               style={{
                 padding: "8px 20px",
@@ -74,6 +121,7 @@ function AdminPanel() {
         </div>
 
         <button
+          className="ap-logout-btn"
           onClick={handleLogout}
           style={{
             background: "rgba(255,255,255,0.18)", border: "1.5px solid rgba(255,255,255,0.4)",
@@ -85,7 +133,7 @@ function AdminPanel() {
         </button>
       </div>
 
-      <div style={{ maxWidth: 1000, margin: "0 auto", padding: "32px 16px" }}>
+      <div className="ap-content">
 
         {/* Toast message */}
         {msg.text && (

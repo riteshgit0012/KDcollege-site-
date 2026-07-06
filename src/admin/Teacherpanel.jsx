@@ -88,13 +88,45 @@ function TeacherPanel({ token, showMsg }) {
 
   return (
     <div>
+      {/* ─── Responsive styles ─── */}
+      <style>{`
+        .tp-panel {
+          background: white;
+          border-radius: 16px;
+          padding: 28px 32px;
+          box-shadow: 0 4px 20px rgba(26,60,143,0.08);
+        }
+        .tp-form-grid {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 24px;
+        }
+        .tp-list-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+          gap: 20px;
+        }
+
+        @media (max-width: 768px) {
+          .tp-panel { padding: 20px 18px; }
+          .tp-form-grid { grid-template-columns: 1fr; gap: 18px; }
+          .tp-list-grid { grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 14px; }
+        }
+
+        @media (max-width: 400px) {
+          .tp-panel { padding: 16px 14px; }
+          .tp-panel h2 { font-size: 17px !important; }
+          .tp-list-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
+        }
+      `}</style>
+
       {/* Add Teacher Form */}
-      <div style={{ background: "white", borderRadius: 16, padding: "28px 32px", boxShadow: "0 4px 20px rgba(26,60,143,0.08)", marginBottom: 32 }}>
+      <div className="tp-panel" style={{ marginBottom: 32 }}>
         <h2 style={{ margin: "0 0 24px", color: "#1a3c8f", fontSize: 20, fontWeight: 800 }}>
           👨‍🏫 Add New Teacher
         </h2>
         <form onSubmit={handleSubmit}>
-          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 24 }}>
+          <div className="tp-form-grid">
 
             {/* Photo Upload */}
             <div>
@@ -149,14 +181,14 @@ function TeacherPanel({ token, showMsg }) {
       </div>
 
       {/* Teachers List */}
-      <div style={{ background: "white", borderRadius: 16, padding: "28px 32px", boxShadow: "0 4px 20px rgba(26,60,143,0.08)" }}>
+      <div className="tp-panel">
         <h2 style={{ margin: "0 0 20px", color: "#1a3c8f", fontSize: 20, fontWeight: 800 }}>
           📋 All Teachers ({teachers.length})
         </h2>
         {teachers.length === 0 ? (
           <p style={{ color: "#aaa", textAlign: "center", padding: "40px 0" }}>No teachers added yet.</p>
         ) : (
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(200px, 1fr))", gap: 20 }}>
+          <div className="tp-list-grid">
             {teachers.map((t) => (
               <div key={t._id || t.id} style={{ borderRadius: 14, overflow: "hidden", border: "1px solid #eef0f8", boxShadow: "0 2px 10px rgba(0,0,0,0.07)", background: "#fafbff" }}>
                 <img
@@ -165,7 +197,7 @@ function TeacherPanel({ token, showMsg }) {
                   style={{ width: "100%", height: 160, objectFit: "cover", display: "block" }}
                 />
                 <div style={{ padding: "12px 14px" }}>
-                  <div style={{ fontSize: 15, fontWeight: 700, color: "#1a3c8f", marginBottom: 4 }}>{t.name}</div>
+                  <div style={{ fontSize: 15, fontWeight: 700, color: "#1a3c8f", marginBottom: 4, wordBreak: "break-word" }}>{t.name}</div>
                   <div style={{ fontSize: 12, color: "#666", background: "#e8efff", display: "inline-block", padding: "3px 10px", borderRadius: 20, fontWeight: 600, marginBottom: 10 }}>
                     {t.department}
                   </div>

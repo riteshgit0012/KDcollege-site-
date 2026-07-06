@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 
 const API = "https://kdcollege-site-production.up.railway.app/api";
+const API_BASE = "https://kdcollege-site-production.up.railway.app";
 
 const DEPT_SUBJECTS = {
   Science: [
@@ -154,16 +155,79 @@ function SubjectPDFPanel({ token, showMsg }) {
         .pdf-row:hover { filter: brightness(0.97); }
         .cls-btn:hover { transform: scale(1.05); }
         .drop-zone:hover { border-color: #1a3c8f !important; background: #f0f4ff !important; }
+
+        /* ─── Responsive layout ─── */
+        .spdf-header {
+          background: white; border-radius: 16px; padding: 24px 28px;
+          box-shadow: 0 4px 20px rgba(26,60,143,0.08); margin-bottom: 24px;
+          display: flex; align-items: center; gap: 16px;
+        }
+        .spdf-dept-tabs {
+          display: flex; gap: 10px; margin-bottom: 24px;
+          overflow-x: auto; -webkit-overflow-scrolling: touch;
+          scrollbar-width: none; padding-bottom: 4px;
+        }
+        .spdf-dept-tabs::-webkit-scrollbar { display: none; }
+        .spdf-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+          gap: 16px;
+        }
+        .spdf-modal-overlay {
+          position: fixed; inset: 0;
+          background: rgba(10,20,50,0.55);
+          z-index: 1000;
+          display: flex; align-items: center; justify-content: center;
+          backdrop-filter: blur(5px);
+          padding: 16px;
+        }
+        .spdf-modal {
+          background: white; border-radius: 22px;
+          width: 100%; max-width: 560px;
+          max-height: 90vh; overflow-y: auto;
+          box-shadow: 0 32px 80px rgba(26,60,143,0.28);
+          animation: fadeSlideIn 0.25s ease;
+        }
+        .spdf-modal-header {
+          padding: 24px 28px 20px;
+          display: flex; align-items: center; gap: 14px;
+          position: sticky; top: 0; background: white;
+          border-radius: 22px 22px 0 0; z-index: 1;
+        }
+        .spdf-modal-body { padding: 24px 28px; }
+        .spdf-pdf-row {
+          display: flex; align-items: center; gap: 12px;
+          padding: 12px 14px; border-radius: 12px;
+          transition: filter 0.15s;
+          flex-wrap: wrap;
+        }
+
+        @media (max-width: 768px) {
+          .spdf-grid { grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 12px; }
+          .spdf-header { padding: 18px 16px; }
+        }
+
+        @media (max-width: 520px) {
+          .spdf-header {
+            flex-direction: column; align-items: flex-start;
+            gap: 12px; padding: 16px;
+          }
+          .spdf-header h2 { font-size: 17px !important; }
+          .spdf-grid { grid-template-columns: 1fr; }
+          .spdf-modal-overlay { padding: 10px; align-items: flex-end; }
+          .spdf-modal { max-height: 92vh; border-radius: 18px 18px 0 0; }
+          .spdf-modal-header { padding: 16px 16px 14px; border-radius: 18px 18px 0 0; }
+          .spdf-modal-header h3 { font-size: 16px !important; }
+          .spdf-modal-body { padding: 16px; }
+          .spdf-pdf-row .pdf-actions { width: 100%; display: flex; gap: 8px; justify-content: flex-end; }
+          .dept-tab { padding: 9px 18px !important; font-size: 13px !important; }
+        }
       `}</style>
 
       {/* Header */}
-      <div style={{
-        background: "white", borderRadius: 16, padding: "24px 28px",
-        boxShadow: "0 4px 20px rgba(26,60,143,0.08)", marginBottom: 24,
-        display: "flex", alignItems: "center", gap: 16,
-      }}>
+      <div className="spdf-header">
         <div style={{
-          width: 52, height: 52, borderRadius: 14,
+          width: 52, height: 52, borderRadius: 14, flexShrink: 0,
           background: deptMeta.gradient,
           display: "flex", alignItems: "center", justifyContent: "center", fontSize: 24,
         }}>
@@ -180,11 +244,10 @@ function SubjectPDFPanel({ token, showMsg }) {
       </div>
 
       {/* Department Tabs */}
-      <div style={{ display: "flex", gap: 10, marginBottom: 24 }}>
+      <div className="spdf-dept-tabs">
         {Object.keys(DEPT_SUBJECTS).map((dept) => {
-          const dm      = DEPT_META[dept];
+          const dm       = DEPT_META[dept];
           const isActive = activeDept === dept;
-          const total   = pdfs.filter((p) => DEPT_SUBJECTS[dept]?.some((s) => s.name === p.subject)).length;
           return (
             <button
               key={dept}
@@ -202,6 +265,7 @@ function SubjectPDFPanel({ token, showMsg }) {
                 boxShadow: isActive ? "0 4px 16px rgba(26,60,143,0.28)" : "none",
                 transition: "all 0.2s",
                 display: "flex", alignItems: "center", gap: 6,
+                whiteSpace: "nowrap", flexShrink: 0,
               }}
             >
               <span>{dm.icon}</span>
@@ -226,11 +290,7 @@ function SubjectPDFPanel({ token, showMsg }) {
           <div style={{ fontSize: 14 }}>Loading PDFs...</div>
         </div>
       ) : (
-        <div style={{
-          display: "grid",
-          gridTemplateColumns: "repeat(auto-fill, minmax(260px, 1fr))",
-          gap: 16,
-        }}>
+        <div className="spdf-grid">
           {subjects.map((sub, i) => {
             const count = getSubjectPdfs(sub.name).length;
             return (
@@ -257,7 +317,7 @@ function SubjectPDFPanel({ token, showMsg }) {
                   }}>
                     {sub.icon}
                   </div>
-                  <div>
+                  <div style={{ minWidth: 0 }}>
                     <div style={{ fontWeight: 700, fontSize: 15, color: sub.color }}>{sub.name}</div>
                     <div style={{
                       marginTop: 4, fontSize: 12, fontWeight: 600,
@@ -300,43 +360,21 @@ function SubjectPDFPanel({ token, showMsg }) {
 
       {/* ─── MODAL ─── */}
       {modal && (
-        <div
-          onClick={closeModal}
-          style={{
-            position: "fixed", inset: 0,
-            background: "rgba(10,20,50,0.55)",
-            zIndex: 1000,
-            display: "flex", alignItems: "center", justifyContent: "center",
-            backdropFilter: "blur(5px)",
-            padding: 16,
-          }}
-        >
-          <div
-            onClick={(e) => e.stopPropagation()}
-            style={{
-              background: "white", borderRadius: 22,
-              width: "100%", maxWidth: 560,
-              maxHeight: "90vh", overflowY: "auto",
-              boxShadow: "0 32px 80px rgba(26,60,143,0.28)",
-              animation: "fadeSlideIn 0.25s ease",
-            }}
-          >
+        <div className="spdf-modal-overlay" onClick={closeModal}>
+          <div className="spdf-modal" onClick={(e) => e.stopPropagation()}>
             {/* Modal Header */}
-            <div style={{
-              padding: "24px 28px 20px",
-              borderBottom: `3px solid ${modal.bg}`,
-              display: "flex", alignItems: "center", gap: 14,
-              position: "sticky", top: 0, background: "white",
-              borderRadius: "22px 22px 0 0", zIndex: 1,
-            }}>
+            <div
+              className="spdf-modal-header"
+              style={{ borderBottom: `3px solid ${modal.bg}` }}
+            >
               <div style={{
-                width: 52, height: 52, borderRadius: 14,
+                width: 52, height: 52, borderRadius: 14, flexShrink: 0,
                 background: modal.bg,
                 display: "flex", alignItems: "center", justifyContent: "center", fontSize: 26,
               }}>
                 {modal.icon}
               </div>
-              <div style={{ flex: 1 }}>
+              <div style={{ flex: 1, minWidth: 0 }}>
                 <h3 style={{ margin: 0, color: modal.color, fontWeight: 800, fontSize: 19 }}>
                   {modal.name}
                 </h3>
@@ -348,13 +386,13 @@ function SubjectPDFPanel({ token, showMsg }) {
                 onClick={closeModal}
                 style={{
                   background: "#f5f5f5", border: "none", width: 36, height: 36,
-                  borderRadius: "50%", cursor: "pointer", fontSize: 18,
+                  borderRadius: "50%", cursor: "pointer", fontSize: 18, flexShrink: 0,
                   color: "#888", display: "flex", alignItems: "center", justifyContent: "center",
                 }}
               >×</button>
             </div>
 
-            <div style={{ padding: "24px 28px" }}>
+            <div className="spdf-modal-body">
 
               {/* Upload Toggle Button */}
               {!uploadVisible ? (
@@ -443,7 +481,7 @@ function SubjectPDFPanel({ token, showMsg }) {
                         <div style={{ fontSize: 30, marginBottom: 6 }}>
                           {pdfFile ? "📄" : "📁"}
                         </div>
-                        <div style={{ fontSize: 13, color: modal.color, fontWeight: 600 }}>
+                        <div style={{ fontSize: 13, color: modal.color, fontWeight: 600, wordBreak: "break-all" }}>
                           {pdfFile ? pdfFile.name : "Click to select a PDF file"}
                         </div>
                         {pdfFile && (
@@ -503,12 +541,10 @@ function SubjectPDFPanel({ token, showMsg }) {
                     {modalPdfs.map((pdf) => (
                       <div
                         key={pdf._id}
-                        className="pdf-row"
+                        className="pdf-row spdf-pdf-row"
                         style={{
-                          display: "flex", alignItems: "center", gap: 12,
-                          padding: "12px 14px", background: modal.bg,
-                          borderRadius: 12, border: `1px solid ${modal.color}22`,
-                          transition: "filter 0.15s",
+                          background: modal.bg,
+                          border: `1px solid ${modal.color}22`,
                         }}
                       >
                         <span style={{ fontSize: 22 }}>📄</span>
@@ -523,31 +559,33 @@ function SubjectPDFPanel({ token, showMsg }) {
                             {pdf.original_name}
                           </div>
                         </div>
-                        <a
-                          href={`http://localhost:5001${pdf.url}`}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          style={{
-                            padding: "5px 12px", borderRadius: 8,
-                            background: modal.color + "18", color: modal.color,
-                            textDecoration: "none", fontWeight: 700, fontSize: 12,
-                            border: `1px solid ${modal.color}44`,
-                          }}
-                        >
-                          View
-                        </a>
-                        <button
-                          onClick={() => handleDelete(pdf._id, modal.name)}
-                          disabled={deleting === pdf._id}
-                          style={{
-                            padding: "5px 12px", background: "#fdecea",
-                            color: "#c62828", border: "1px solid #f5c6c6",
-                            borderRadius: 8, cursor: deleting === pdf._id ? "not-allowed" : "pointer",
-                            fontSize: 12, fontWeight: 700,
-                          }}
-                        >
-                          {deleting === pdf._id ? "..." : "Delete"}
-                        </button>
+                        <div className="pdf-actions" style={{ display: "flex", gap: 8 }}>
+                          <a
+                            href={`${API_BASE}${pdf.url}`}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            style={{
+                              padding: "5px 12px", borderRadius: 8,
+                              background: modal.color + "18", color: modal.color,
+                              textDecoration: "none", fontWeight: 700, fontSize: 12,
+                              border: `1px solid ${modal.color}44`,
+                            }}
+                          >
+                            View
+                          </a>
+                          <button
+                            onClick={() => handleDelete(pdf._id, modal.name)}
+                            disabled={deleting === pdf._id}
+                            style={{
+                              padding: "5px 12px", background: "#fdecea",
+                              color: "#c62828", border: "1px solid #f5c6c6",
+                              borderRadius: 8, cursor: deleting === pdf._id ? "not-allowed" : "pointer",
+                              fontSize: 12, fontWeight: 700,
+                            }}
+                          >
+                            {deleting === pdf._id ? "..." : "Delete"}
+                          </button>
+                        </div>
                       </div>
                     ))}
                   </div>
