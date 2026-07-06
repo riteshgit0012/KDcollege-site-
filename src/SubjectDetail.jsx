@@ -145,7 +145,7 @@ function SubjectDetail() {
               return (
                 <a
                   key={pdf._id}
-                  href={`http://localhost:5001${pdf.url}`}
+                  href={`${API_BASE}${pdf.url}`}
                   target="_blank"
                   rel="noopener noreferrer"
                   style={{
